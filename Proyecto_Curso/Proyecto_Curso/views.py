@@ -3,6 +3,12 @@ from django.http import HttpResponse
 from django.template import Template, Context
 import datetime
 
+#Clase persona para la plantilla 1.
+class Persona:
+    def __init__(self, nombre, apellido):
+        self.nombre = nombre
+        self.apellido = apellido
+
 #Creando la primera vista.
 def saludo(request):
     return HttpResponse("Hola, esta es mi primera página con Django.")
@@ -57,6 +63,14 @@ def calcularEdad(request, edad, anio):
 #Se crea una vista con plantillas.
 def plantilla_1(request):
 
+    nombre = 'Agustin Oscar Reyes González'
+    edad = 28
+    fecha_actual = datetime.datetime.now()
+
+    persona_1 = Persona('Oscar', 'Reyes')
+
+    diccionario_contexto = {'persona': persona_1, 'fecha':fecha_actual}
+
     doc_externo = open('C:/Users/reyes/Desktop/Curso Django/Proyecto_Curso/Proyecto_Curso/Templates/plantilla_1.html')
 
     #Se crea objeto Template.
@@ -65,7 +79,7 @@ def plantilla_1(request):
     doc_externo.close()
 
     #Se crea contexto vacío.
-    contexto = Context()
+    contexto = Context(diccionario_contexto)
 
     documento = template_1.render(contexto)
 
