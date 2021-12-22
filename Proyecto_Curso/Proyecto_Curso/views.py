@@ -1,5 +1,6 @@
 #Librerías necesarias.
 from django.http import HttpResponse
+from django.template import Template, Context
 import datetime
 
 #Creando la primera vista.
@@ -52,3 +53,20 @@ def calcularEdad(request, edad, anio):
     """ %(anio,edad_futura)
 
     return HttpResponse(dato)
+
+#Se crea una vista con plantillas.
+def plantilla_1(request):
+
+    doc_externo = open('C:/Users/reyes/Desktop/Curso Django/Proyecto_Curso/Proyecto_Curso/Templates/plantilla_1.html')
+
+    #Se crea objeto Template.
+    template_1 = Template(doc_externo.read())
+
+    doc_externo.close()
+
+    #Se crea contexto vacío.
+    contexto = Context()
+
+    documento = template_1.render(contexto)
+
+    return HttpResponse(documento)
