@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>
+            {% block title %}
+
+            {% endblock %}
+        </title>
+    </head>
+</html>
+
+<body>
+    <h1 style="background-color: darkolivegreen; color: white; text-align: center;">
+        Píldoras Informáticas
+    </h1>
+
+    <!--Se pone una subplantilla-->
+    {% include "plantilla_2.html"%}
+
+    <h3>
+        Cursos de programación
+    </h3>
+
+    {% block content %}
+    {% endblock %}
+
+    <p style="background-color: darkolivegreen; color: white; text-align: right;">
+        Cursos grstuitos
+    </p>
+</body>

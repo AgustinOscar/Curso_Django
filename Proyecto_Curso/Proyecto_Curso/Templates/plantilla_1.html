@@ -1,10 +1,45 @@
 <html>
     <body>
+
+        <!--Se pone una subplantilla-->
+        {% include "plantilla_2.html"%}
+
         <h1>
         Esta es mi primer plantilla
         </h1>
-        <p> El nombre del profesor es:{{persona.nombre}} {{persona.apellido}} y su edad es {{edad_persona}} 
-            La fecha actual es {{fecha}}
+
+        <!--Comentario de varias lineas-->
+        {% comment %}
+            Este es un comentrario
+            de 
+            varias
+            lineas
+        {% endcomment %}
+
+        {% if persona.nombre == 'Oscar' and persona.apellido == 'Reyes' %}
+            <p>El curso lo imparte: {{persona.nombre}} {{persona.apellido}}</p>
+        {% else %}
+            <p> Este curso es pirata</p>
+        {% endif %}
+
+        <p> El nombre del profesor es:{{persona.nombre.upper}} {{persona.apellido.upper}} y su edad es {{edad_persona}}</p>
+        <p> La fecha actual es {{fecha}}</p>
+        <p> Materias del siguiente semestre:</p> 
+        <!--Estamos mostrando las materias mediante un bucle-->
+        <p><strong>Materias pendientes</strong></p> 
+        <p>
+            <!--Los bucles en Django van encerrrados entre corchetes-->
+            
+            <!--Bucle for-->
+            <ul>
+                {% if materias %}
+                    {% for materia in materias %}
+                        <li>{{materia}}</li>
+                    {% endfor %}
+                {% else %}
+                    <p>No hay elementos para mostrar.</p>
+                {% endif %}
+            </ul>
         </p>
     </body>
 </html>

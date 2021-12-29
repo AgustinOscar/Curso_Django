@@ -1,7 +1,10 @@
-#Librerías necesarias.
+#Librerías y módulos necesarios.
 from django.http import HttpResponse
 from django.template import Template, Context
+from django.template.loader import get_template
+from django.shortcuts import render
 import datetime
+
 
 #Clase persona para la plantilla 1.
 class Persona:
@@ -67,13 +70,20 @@ def plantilla_1(request):
     edad = 28
     fecha_actual = datetime.datetime.now()
 
+    #Creamos un objeto de tipo persona.
     persona_1 = Persona('Oscar', 'Reyes')
 
-    diccionario_contexto = {'persona': persona_1, 'fecha':fecha_actual}
+    #Creamos una lista.
+    materias = ["Dispositivos electrónicos", "Inteligencia Artificial", "Redes de datos"]
 
+    diccionario_contexto = {'persona': persona_1, 'fecha':fecha_actual, 'materias':materias}
+
+    '''
+    Se abría una plantilla con el método clásico y no con el cargador
+    
     doc_externo = open('C:/Users/reyes/Desktop/Curso Django/Proyecto_Curso/Proyecto_Curso/Templates/plantilla_1.html')
 
-    #Se crea objeto Template.
+    Se crea objeto Template.
     template_1 = Template(doc_externo.read())
 
     doc_externo.close()
@@ -82,5 +92,22 @@ def plantilla_1(request):
     contexto = Context(diccionario_contexto)
 
     documento = template_1.render(contexto)
+    '''
 
-    return HttpResponse(documento)
+    #Cargamos la plantilla.
+    #doc_externo = get_template('plantilla_1.html')
+
+    #Documento HttpResponse.
+    #documento = doc_externo.render(diccionario_contexto)
+    
+    #return HttpResponse(documento)
+
+    return render(request, 'plantilla_1.html', diccionario_contexto )
+
+def cursoDjango(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, 'curso.html', {'dameFecha':fecha_actual})
+
+def cursoDjango2(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, 'curso_2.html', {'damefecha':fecha_actual})

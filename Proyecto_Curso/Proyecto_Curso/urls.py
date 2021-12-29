@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Proyecto_Curso.views import saludo, datosAlumno, fecha, calcularEdad, plantilla_1
+from Proyecto_Curso.views import saludo, datosAlumno, fecha, calcularEdad, plantilla_1, cursoDjango, cursoDjango2
+
 
 
 urlpatterns = [
@@ -25,4 +26,6 @@ urlpatterns = [
     path('vista_FechaActual/', fecha),
     path('vista_EdadFutura/<int:edad>/<int:anio>', calcularEdad),
     path('vista_plantilla1', plantilla_1),
+    path('vista_cursoDjango/', cursoDjango),
+    path('vista_cursoDjango2/', cursoDjango2)
 ]
